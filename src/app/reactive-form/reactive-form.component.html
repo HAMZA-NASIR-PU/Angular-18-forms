@@ -1,7 +1,9 @@
 <h3>Favourite Color: (Reactive Form)</h3>
 
 <div>
-    <input type="text" [formControl]="favouriteFormControl" />
+    <input type="text" [formControl]="favouriteColorControl" />
 </div>
 
-<p>Favourite Color:  {{favouriteFormControl.value}} </p>
+<p>Favourite Color:  {{favouriteColorControl.value}} </p>
+
+<button (click)="changeColor()">Change Color</button>

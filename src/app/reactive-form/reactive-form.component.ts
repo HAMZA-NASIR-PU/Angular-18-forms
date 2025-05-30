@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ControlValueAccessor, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-reactive-form',
@@ -9,5 +9,18 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './reactive-form.component.css'
 })
 export class ReactiveFormComponent {
-  favouriteFormControl = new FormControl('');
+  favouriteColorControl = new FormControl('');
+
+  constructor() {
+    // Data flow from view to model
+    this.favouriteColorControl.valueChanges.subscribe((color: any) => {
+      console.log(`Favourite Color: ${color}`)
+    });
+  }
+
+  changeColor() {
+    // Data flow from model to view. 
+    this.favouriteColorControl.setValue('Red');
+  }
+
 }
