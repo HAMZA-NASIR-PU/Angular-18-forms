@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { FormsModule, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-template-form',
@@ -8,9 +8,22 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './template-form.component.html',
   styleUrl: './template-form.component.css'
 })
-export class TemplateFormComponent {
+export class TemplateFormComponent implements AfterViewInit {
 
+  @ViewChild('colorInput') colorInputModel!: NgModel
   favouriteColor: string = '';
+
+  @ViewChild('colInput') colInput!: ElementRef;
+
+  ngAfterViewInit() {
+    console.log(this.colorInputModel);
+
+    console.log(this.colInput);
+
+    this.colorInputModel.valueChanges?.subscribe((data: any) => { 
+      console.log(data);
+    });
+  }
 
   updateColor() {
     this.favouriteColor = "RED";
