@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-profile-editor',
@@ -20,8 +20,17 @@ export class ProfileEditorComponent {
       city: [''],
       state: [''],
       zip: ['']
-    })
+    }),
+    aliases: this.formBuilder.array([this.formBuilder.control('')]),
   });
+
+  get aliases(): FormArray {
+    return this.profileForm.get('aliases') as FormArray;
+  }
+
+  addAlias() {
+    this.aliases.push(this.formBuilder.control(''));
+  }
 
   onSubmit(event: Event) {
     console.log(`Is form valid: ${this.profileForm.valid}`);

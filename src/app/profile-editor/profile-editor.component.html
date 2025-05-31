@@ -38,6 +38,18 @@
 
     <br>
 
+    <div formArrayName="aliases">
+        <h2>Aliases</h2>
+
+        @for (alias of this.aliases.controls; track alias) {
+        <label>Alias {{ $index + 1 }}</label>
+        <input type="text" [formControlName]="$index" />
+        }
+
+
+        <button type="button" (click)="addAlias()">Add Aliases</button>
+    </div>
+
     <div>
         <button type="submit" [disabled]="!this.profileForm.valid">Submit</button>
     </div>
