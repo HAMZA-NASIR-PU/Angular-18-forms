@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-profile-editor',
@@ -10,14 +10,16 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 })
 export class ProfileEditorComponent {
 
-  profileForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    address: new FormGroup({
-      street: new FormControl(''),
-      city: new FormControl(''),
-      state: new FormControl(''),
-      zip: new FormControl('')
+  private formBuilder = inject(FormBuilder);
+
+  profileForm = this.formBuilder.group({
+    firstName: ['', [Validators.required]],
+    lastName: [''],
+    address: this.formBuilder.group({
+      street: [''],
+      city: [''],
+      state: [''],
+      zip: ['']
     })
   });
 
@@ -27,11 +29,14 @@ export class ProfileEditorComponent {
   }
 
   updateProfile() {
+    // patchValue is used to update only some parts of a group. 
     this.profileForm.patchValue({
       firstName: 'Update firstName',
       address: {
         street: 'Updated address.street'
       }
     });
+
+    //setValue si sued to complete the whole FormGroup.
   }
 }

@@ -2,6 +2,15 @@
     <label for="first-name">First Name</label>
     <input type="text" id="first-name" formControlName="firstName" />
 
+    @if (this.profileForm.get('firstName')?.invalid) {
+    <div style="color: red;">First Name is required. (only invalid)</div>
+    }
+
+    @if (this.profileForm.get('firstName')?.invalid &&
+    this.profileForm.get('firstName')?.touched) {
+    <div style="color: red;">First Name is required. (invalid && touched)</div>
+    }
+
     <label for="last-name">Last Name</label>
     <input type="text" id="last-name" formControlName="lastName" />
 
