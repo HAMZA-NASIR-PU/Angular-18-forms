@@ -5,7 +5,35 @@
     <label for="last-name">Last Name</label>
     <input type="text" id="last-name" formControlName="lastName" />
 
+    <br>
+
+    <div formGroupName="address">
+        <label for="street">Street</label>
+        <input type="text" id="street" formControlName="street">
+
+        <br>
+
+        <label for="city">City</label>
+        <input type="text" id="city" formControlName="city">
+
+        <br>
+
+        <label for="state">State</label>
+        <input type="text" id="state" formControlName="state">
+
+        <br>
+
+        <label for="zip">Zip</label>
+        <input type="text" id="zip" formControlName="zip">
+    </div>
+
+    <br>
+
     <div>
         <button type="submit" [disabled]="!this.profileForm.valid">Submit</button>
+    </div>
+
+    <div>
+        <button type="button" (click)="updateProfile()">Update profile</button>
     </div>
 </form>
